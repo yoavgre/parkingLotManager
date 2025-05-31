@@ -16,8 +16,8 @@ async def process_entry(plate: str, parking_lot: int) -> str:
     return ticket_id, entry_time
 
 
-async def process_exit(plate: str):
-    record = await entries_collection.find_one_and_delete({"plate": plate})
+async def process_exit(ticket_id: str):
+    record = await entries_collection.find_one_and_delete({"ticket_id": ticket_id})
     if not record:
         return None
     exit_time = datetime.utcnow()
